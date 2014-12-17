@@ -56,20 +56,191 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 
 <div id="TOC">
 <ul>
-<li><a href="#type-s-and-type-m-errors">Type S and Type M errors</a></li>
+<li><a href="#december-17-2014-multivariate-methods">December 17 2014: Multivariate methods</a></li>
+<li><a href="#december-16-2014-type-s-and-type-m-errors">December 16 2014: Type S and Type M errors</a></li>
+<li><a href="#november-19-2014-occupancy-modelling-glms-nls-sem">November 19 2014: Occupancy modelling, GLMs, nls, SEM</a></li>
+<li><a href="#october-14-2014-cis-gams-standardizing-interactions-tmb">October 14 2014: CIs, GAMs, standardizing, interactions, TMB</a></li>
+<li><a href="#october-7-2014-roc-curves-gams">October 7 2014: ROC curves, GAMs</a></li>
+<li><a href="#october-2-2014-miscellaneous">October 2 2014: Miscellaneous</a></li>
+<li><a href="#september-11-2014-nonsensical-lme-output">September 11 2014: Nonsensical lme output</a></li>
+<li><a href="#july-30-2014-centering-factor-levels-for-model-averaging-with-interactions">July 30 2014: Centering factor levels for model averaging with interactions</a></li>
+<li><a href="#june-20-2014-deadly-hurricane-re-analyses-and-the-importance-of-plotting-those-residuals">June 20 2014: Deadly hurricane re-analyses and the importance of plotting those residuals</a></li>
 </ul>
 </div>
 
-<div id="type-s-and-type-m-errors" class="section level3">
-<h3>Type S and Type M errors</h3>
-<div id="sean-anderson-december-16-2014" class="section level4">
-<h4>Sean Anderson, December 16 2014</h4>
+<p>Links collated by Nicky Dulvy: <a href="http://www.dulvy.com/statz-beerz.html" class="uri">http://www.dulvy.com/statz-beerz.html</a></p>
+<div id="december-17-2014-multivariate-methods" class="section level3">
+<h3>December 17 2014: Multivariate methods</h3>
+<p><em>Pascale Gibeau</em></p>
+<p>Here are a few more details about what we talked about yesterday at stats beer re. your data and their potential for multivariate analysis:</p>
+<p><strong>Ordinations (PCA, MDS,CA)</strong>: they are a nice way to explore the multidimensional nature of your data, get a feel for relationships and correlations, etc. There are several functions in R to do them, and they are usually easy to use. Beware of the scaling: scaling 1 approximates the distance among your objects (the closer your objects, ie. fish, are in your ordination diagram, the more similar they are in terms of whatever variables you used to describe them), while scaling 2 approximates the correlations among your variables (the smaller the angles on the ordination diagram between two vectors, the more correlated they are). As we said, PCA can be a good way to summarize a high number of variables in a big dataset to a smaller amount of meaningful axis, e.g. for light variables, or water chemistry, or discharge etc.</p>
+<p><strong>Canonical ordinations (redundancy analysis, canonical correspondance analysis)</strong>: they are an extension of ordinations that include regressions to constrain the variations in your set of dependent variables (by convention named Y, as compared to y in a unidimensional context) by a series of dependent variables X. They are a step further than simple ordinations (which are not statistical tests, but simply “graphs” in a multidimensional space), since they formally test how much of the variation in Y is explain by the Xs. So you get an ordination diagram with two sets of vectors this time (the Ys and the Xs), as well as a series of coefficients and parameters like in simple regressions that tell you which of your Xs explain most of the variation in the Ys, as well as an overall R2 and probability. It can be a powerful way to understand and describe a complex multivariate dataset, but it also can suffer from the same thing, i.e. being too complex to make sense ;-) Also, it assumes linearity among your Ys and Xs (you can always transform variables to achieve that, but that also is complex with a multivariate dataset), and does not deal super well with qualitative variables. In your case though, you could probably use RDA to do your MANOVAs, which might be something worth exploring.</p>
+<p><strong>Multivariate regression trees</strong>: they are similar in a way to canonical ordinations in that they use a set of Ys and Xs, but they are part of the clustering techniques rather than a formal hypothesis testing method. That can be nice sometimes when the data are too complex or messy to yield well to formal testing. You can use the trees to explore and sort through which ones of your independent variables are driving most of the differences in your Ys among objects, which can be useful as a first step leading to more formal testing (or not). The tree splits the objects based on your Xs, giving you a threshold value in each X variable used for the split, until a certain number of branches where the deviance explained is not big enough anymore (which you can set yourself based on certain criteria). And yes Josh, you can prune them ;-) If your dependent variables are binary (i.e. Yes/No, presence/absence), you can use classification trees. They are nice I find because they give a nice graphical display, they don’t assume linearity among variables, and they deal well with quantitative and qualitative variables. My bet is you could use them to sort through your various independent variables and factors and help you justify why you’d merge or not, or drop certain variables from further testing.</p>
+<p>My bible for ordinations, RDAs, multivariate trees, and most other multivariate analysis is (some of you may guess ;) the Legendre book: <a href="http://adn.biol.umontreal.ca/~numericalecology/" class="uri">http://adn.biol.umontreal.ca/~numericalecology/</a>. The Numerical Ecology book has all the theoretical foundations and explanations for those techniques – libraries usually have it, or you can order online. The second one on the page at the link above is a companion book which gives all the R codes to do those techniques :-) Very handy. Pierre Legendre also has several R codes and functions available on his website (<a href="http://adn.biol.umontreal.ca/~numericalecology/Rcode/" class="uri">http://adn.biol.umontreal.ca/~numericalecology/Rcode/</a>), including the ones I use for RDAs – most of his functions run with permutations (i.e. bootstraps) which is pretty neat since it relaxes the need to normalize your data (which is also a pain in a multivariate context).</p>
+</div>
+<div id="december-16-2014-type-s-and-type-m-errors" class="section level3">
+<h3>December 16 2014: Type S and Type M errors</h3>
+<p><em>Sean Anderson</em></p>
 <p>Andrew Gelman and John Carlin have a fantastic new paper on why we should move beyond power calculations to concentrating on Type S (sign) and Type M (magnitude) errors: <a href="http://www.stat.columbia.edu/~gelman/research/published/PPS551642_REV2.pdf" class="uri">http://www.stat.columbia.edu/~gelman/research/published/PPS551642_REV2.pdf</a></p>
 <p>It’s very readable and explains intuitively why these errors occur, how to calculate their probability, and how to reduce their probability. They advocate considering Type S and M errors both when designing a study, but also later when interpreting statistical analyses so we have a better idea of how confident (or not) we should be in our results.</p>
 <p>A couple quotes: “It is quite possible for a result to be significant at the 5% level—with a 95% confidence interval that entirely excludes zero—and for there to be a high chance, sometimes 40% or more, that this interval is on the wrong side of zero.”</p>
 <p>“Using statistical significance as a screener can lead researchers to drastically overestimate the magnitude of an effect.”</p>
 <p>They include R code to calculate the probability of Type S and Type M errors and use two studies as examples. One of them is a UBC psychology study where they show that there’s a 24% chance that the authors found an effect in the wrong direction and the effect they did find is expected to be almost 10 times too high. The data in these psychology studies isn’t that different from the data we often work with in ecology, so take note! Small expected effects and lots of noise require a lot of data, there’s no way around it.</p>
 </div>
+<div id="november-19-2014-occupancy-modelling-glms-nls-sem" class="section level3">
+<h3>November 19 2014: Occupancy modelling, GLMs, nls, SEM</h3>
+<p><em>Sean Anderson</em></p>
+<div id="occupancy-modelling" class="section level4">
+<h4>Occupancy modelling</h4>
+<p>Rylee talked about a bullfrog occupancy model and concerns about the implied shape of the relationship between a predictor (distance) and occupancy probability.</p>
+<p>We talked about the logit transformation that these kinds of models (like logistic regression on its own) are fit with and what this implies about the shape of the response-predictor relationship.</p>
+<p>The logit transformation: <a href="http://en.wikipedia.org/wiki/Logit" class="uri">http://en.wikipedia.org/wiki/Logit</a> <a href="http://en.wikipedia.org/wiki/Logistic_regression" class="uri">http://en.wikipedia.org/wiki/Logistic_regression</a></p>
+<p>Basically, the logit link transforms data ranging from 0 to 1 onto the range of -infinity to infinity. This means that when the model output is transformed back to the probability scale (0 to 1), the relationship follows a logistic curve that gradually tails off at both ends. Plotting the predictor-response relationship while holding the other predictors constant should illustrate this.</p>
+</div>
+<div id="glms-etc." class="section level4">
+<h4>GLMs etc.</h4>
+<p>There was some discussion about how overwhelming it can seem with all the possible data transformations (or link functions) and error distributions.</p>
+<p>We talked about how, in reality, the vast majority if problems we encounter fall into one of a few categories:</p>
+<ol style="list-style-type: decimal">
+<li><p>An identity link and normal error distribution (i.e. linear regression) for continuous data that can be positive or negative. Usually this results from things adding together – think a + b = y not a * b = y. We can often transform response data to make a linear regression appropriate. By far the most common is to log-transform the response, which means we model a + b = log(y) or equivalently exp(a) * exp(b) = y. We’ve gone from an additive relationship to a multiplicative one. Many relationships in ecology are like this. Response data that must be greater than zero is one hint.</p></li>
+<li><p>A log link and Gamma error distribution for continuous data that must be positive (this can be very similar to a linear regression with log-transformed response data and often either is appropriate)</p></li>
+<li><p>A logit link with a binomial error distribution for modelling 0s and 1s (logistic regression)</p></li>
+<li><p>A log link and a Poisson distribution for count data</p></li>
+<li><p>A log link and a negative binomial distribution for count data that has more variability than the Poisson distribution allows (i.e. most ecological datasets)</p></li>
+</ol>
+<p>Another semi-common one is the beta error distribution for continuous values ranging between 0 and 1 (say proportions), which is often modelled with a logit link.</p>
+</div>
+<div id="goodness-of-fit-for-nls-models" class="section level4">
+<h4>Goodness of fit for nls() models</h4>
+<p>There isn’t an exact R^2 equivalent for many nonlinear models. R^2 compares the variance explained by a model to the variance explained by a null constant model (an intercept only). It’s not obvious with many nonlinear models what that null model should be since a constant model isn’t necessarily possible.</p>
+<p>Best practice is probably to focus on model comparison, say with AIC, to evaluate relative model fit, and graphically present model predictions overlaid on the data to demonstrate goodness of fit.</p>
+<p>There are some pseudo-R^2 measures that people sometimes use like looking at the correlation of predicted vs. observed points. Or even just plotting predicted vs. observed points. Even better, do some sort of cross-validation where you fit your model to some of the data and predict on the rest and then repeat. R has the boot::boot() function to help with that and the <code>boot::cv.glm()</code> function specifically for GLM models, but the examples can be a bit hard to work through.</p>
+<p>This blog post summarizes and links to many of the important points about goodness of fit for nls models: <a href="http://fishr.wordpress.com/2013/08/09/r-squared-for-a-vbgm/" class="uri">http://fishr.wordpress.com/2013/08/09/r-squared-for-a-vbgm/</a></p>
+</div>
+<div id="structural-equation-modelling" class="section level4">
+<h4>Structural equation modelling</h4>
+<p>Joel talked about an analysis he’s starting on salmon, stream length, and predation pressure.</p>
+<p>Beanplots are awesome: <a href="http://cran.r-project.org/web/packages/beanplot/index.html" class="uri">http://cran.r-project.org/web/packages/beanplot/index.html</a></p>
+<p>We talked about how he could potentially break it up into separate multilevel models.</p>
+<p>We also talked about structural equation modelling (SEM) (which I know very little about!). The lavaan package is the main structural equation modelling R package, as far as I know: <a href="http://lavaan.ugent.be/" class="uri">http://lavaan.ugent.be/</a></p>
+<p>But, they haven’t yet implemented multilevel structural equation modelling. If anyone needs some SEM pointers, I can connect you with Jarrett Byrnes (<a href="http://byrneslab.net" class="uri">http://byrneslab.net</a>) who has done some pretty extensive workshops on them.</p>
+<p>Separately, this paper looks like it might be useful for these kinds of problems: Shipley, B. 2009. Confirmatory path analysis in a generalized multilevel context. Ecology. <a href="http://www.esajournals.org/doi/full/10.1890/08-1034.1" class="uri">http://www.esajournals.org/doi/full/10.1890/08-1034.1</a></p>
+</div>
+</div>
+<div id="october-14-2014-cis-gams-standardizing-interactions-tmb" class="section level3">
+<h3>October 14 2014: CIs, GAMs, standardizing, interactions, TMB</h3>
+<p><em>Sean Anderson</em></p>
+<div id="confidence-intervals" class="section level4">
+<h4>Confidence intervals</h4>
+<p>We discussed the attached paper “Points of Significance: Error Bars”. This is important reading for just about everyone. Overlapping 95% CIs <em>do not</em> tell you that two coefficients are not significantly different from each other.</p>
+<p>“In general, a gap between bars does not ensure significance, nor does overlap rule it out – it depends on the type of bar. Chances are you were surprised to learn this unintuitive result.”</p>
+</div>
+<div id="gams" class="section level4">
+<h4>GAMs</h4>
+<p>Pascale presented the work she’s done modelling data from an experimental study of tree growth. We discussed model diagnostics for GAMs and what could be considered a random effect.</p>
+</div>
+<div id="standardizing-predictors" class="section level4">
+<h4>Standardizing predictors</h4>
+<p>We spent a ton of time discussing the why, when, and how of centering and scaling predictors and/or response variables. Seems like an important topic to just about everyone. Maybe we should do a little workshop on it at some point.</p>
+<p>Again, yes, you can centre binary predictors and factor predictors and this can help interpreting some models, especially if there are interactions: - Schielzeth 2010: <a href="http://onlinelibrary.wiley.com/doi/10.1111/j.2041-210X.2010.00012.x/abstract" class="uri">http://onlinelibrary.wiley.com/doi/10.1111/j.2041-210X.2010.00012.x/abstract</a> - <a href="http://seananderson.ca/2014/07/30/centering-interactions.html" class="uri">http://seananderson.ca/2014/07/30/centering-interactions.html</a></p>
+</div>
+<div id="interactions" class="section level4">
+<h4>Interactions</h4>
+<p>Natascia presented some work she’s doing where she’s fitting regression models with and without interactions. We talked about why centering predictors can be critical when interpreting models with interactions. We also talked about why you usually want to include a main effect if you include an interaction.</p>
+</div>
+<div id="the-beginnings-of-an-admb-replacement" class="section level4">
+<h4>The beginnings of an ADMB replacement</h4>
+<p>If anyone out there is using ADMB, there’s a new R package on the block called TMB that is making waves. It has similar functionality to ADMB: <a href="https://github.com/kaskr/adcomp" class="uri">https://github.com/kaskr/adcomp</a></p>
+<p>I played with it a bit here: <a href="http://seananderson.ca/2014/10/17/tmb.html" class="uri">http://seananderson.ca/2014/10/17/tmb.html</a></p>
+</div>
+</div>
+<div id="october-7-2014-roc-curves-gams" class="section level3">
+<h3>October 7 2014: ROC curves, GAMs</h3>
+<p><em>Sean Anderson</em></p>
+<div id="culturomics-and-linguistic-analysis" class="section level4">
+<h4>Culturomics and linguistic analysis:</h4>
+<p>A neat paper based on Google Books: “Quantitative Analysis of Culture Using Millions of Digitized Books” <a href="https://dl.dropboxusercontent.com/u/254940/Science-2011-Michel-176-82.pdf" class="uri">https://dl.dropboxusercontent.com/u/254940/Science-2011-Michel-176-82.pdf</a></p>
+</div>
+<div id="false-positivesnegatives" class="section level4">
+<h4>False positives/negatives</h4>
+<p>ROC curves, specificity, sensitivity, accuracy, error rates, etc.: <a href="http://en.wikipedia.org/wiki/Receiver_operating_characteristic" class="uri">http://en.wikipedia.org/wiki/Receiver_operating_characteristic</a></p>
+<p>A positive test for breast cancer still only indicates an 8% probability of having breast cancer: “Visualizing Uncertainty About the Future” <a href="https://dl.dropboxusercontent.com/u/254940/spiegelhalter2011.pdf" class="uri">https://dl.dropboxusercontent.com/u/254940/spiegelhalter2011.pdf</a></p>
+<p>Andrew Gelman on why we should be more focussed on Type S (sign) errors and Type M errors (magnitude – which are more likely to happen with underpowered analyses) than Type 1 and 2 errors: <a href="http://www.stat.columbia.edu/~gelman/research/published/retropower20.pdf" class="uri">http://www.stat.columbia.edu/~gelman/research/published/retropower20.pdf</a> <a href="http://andrewgelman.com/2004/12/29/type_1_type_2_t/" class="uri">http://andrewgelman.com/2004/12/29/type_1_type_2_t/</a></p>
+</div>
+<div id="gams-1" class="section level4">
+<h4>GAMs</h4>
+<p>R packages for GAMs:</p>
+<p>mgcv is the main package: <a href="http://cran.r-project.org/web/packages/mgcv/index.html" class="uri">http://cran.r-project.org/web/packages/mgcv/index.html</a></p>
+<p>To use lme4 as the random effect backend to GAMs: <a href="http://cran.r-project.org/web/packages/gamm4/index.html" class="uri">http://cran.r-project.org/web/packages/gamm4/index.html</a></p>
+<p>Simon Wood’s book: <a href="http://books.google.ca/books/about/Generalized_Additive_Models.html?id=hr17lZC-3jQC" class="uri">http://books.google.ca/books/about/Generalized_Additive_Models.html?id=hr17lZC-3jQC</a></p>
+</div>
+</div>
+<div id="october-2-2014-miscellaneous" class="section level3">
+<h3>October 2 2014: Miscellaneous</h3>
+<p><em>Sean Anderson</em></p>
+<ol style="list-style-type: decimal">
+<li><p>In R formula speak, <code>y ~ a + b + a:b</code> is the same as <code>y ~ a * b</code></p></li>
+<li><p>The need for centering predictors when model averaging across interactions: <a href="http://seananderson.ca/2014/07/30/centering-interactions.html" class="uri">http://seananderson.ca/2014/07/30/centering-interactions.html</a></p></li>
+<li><p>Attached is Schielzeth 2010 “Simple means to improve the interpretability of regression coefficients”, which comes up again and again. Definitely worth a read.</p></li>
+<li><p>The Zuur books cover selecting random effect structures with information criteria, making sure to fit using REML.</p></li>
+<li><p>We talked about options for modelling with ordinal predictors. Andrew Gelman has some interesting thoughts on the topic: <a href="http://andrewgelman.com/2009/10/06/coding_ordinal/" class="uri">http://andrewgelman.com/2009/10/06/coding_ordinal/</a></p></li>
+<li><p>We talked about interpreting coefficients for log-transformed response data. I wrote a few notes on the subject last year: <a href="https://dl.dropboxusercontent.com/u/254940/log-slope.pdf" class="uri">https://dl.dropboxusercontent.com/u/254940/log-slope.pdf</a></p></li>
+</ol>
+<p>Essentially, remember that the exponentiated coefficient is the expected percent change in the (untransformed) response for one unit change in the predictor.</p>
+<ol start="7" style="list-style-type: decimal">
+<li><p>The last object displayed in the R console is stored in an object named .Last.value This is useful if you forgot to capture some output in an object or, say, if you want to look at the output again with <code>head()</code>, <code>View()</code>, or <code>dplyr::glimpse()</code>. E.g.</p>
+<pre class="r"><code>1+ 1
+## [1] 2
+.Last.value
+## [1] 2</code></pre></li>
+<li><p>Rolling your own hurdle model to model continuous-positive data with zeros: <a href="http://seananderson.ca/2014/05/18/gamma-hurdle.html" class="uri">http://seananderson.ca/2014/05/18/gamma-hurdle.html</a></p></li>
+</ol>
+</div>
+<div id="september-11-2014-nonsensical-lme-output" class="section level3">
+<h3>September 11 2014: Nonsensical lme output</h3>
+<blockquote>
+<p>I’m stumped right now, and am wondering if anyone has run into this issue before:</p>
+</blockquote>
+<blockquote>
+<p>I’m doing mixed-effects model selection, and if I divide my response variable by 1000, the model selection results change. The fixed effect coefficients are the same (just divided by 1000), but the model ranks and deltaAICc values are different.</p>
+</blockquote>
+<blockquote>
+<p>In my mind, this shouldn’t happen because dividing the response variable by 1000 is the same as measuring it in, say, millimetres instead of metres. Same value, different units.</p>
+</blockquote>
+<p><em>Sean Anderson:</em></p>
+<p>I don’t know if this is the problem here, but many optimization algorithms struggle with very large or very small values.</p>
+<p>The <code>?nlme::lme</code> help page reiterates this in a note: “The function does not do any scaling internally: the optimization will work best when the response is scaled so its variance is of the order of one.”</p>
+<p>This is probably even more of a problem for estimating accurate random effect variances than fixed effects, partly because the data are usually just less informative about this.</p>
+<p>So, I’d start by looking at the fixed and random effect estimates from your two models and checking that they make sense. Plot them out against the data. It’s quite possible that the original models (before dividing by 1000) are just wrong.</p>
+<p>This is one reason why Andrew Gelman pushes for scaling of data (by dividing by 1 or 2 standard deviations) as a default approach because it ensures that your variables are on approximately the right scale. But you can also use variables on a meaningful unit scale as long as they have a variance of ballpark 1. In reality it’s usually pretty forgiving until you get a few orders of magnitude off.</p>
+<p>Also, make sure you’re fitting with maximum likelihood if you’re comparing AIC. And possibly (probably) switching to restricted maximum likelihood for your final fits. Zuur’s books cover this well.</p>
+</div>
+<div id="july-30-2014-centering-factor-levels-for-model-averaging-with-interactions" class="section level3">
+<h3>July 30 2014: Centering factor levels for model averaging with interactions</h3>
+<p><em>Sean Anderson</em></p>
+<p>I’ve worked with a number of people recently on model averaging with interaction coefficients. Over time I developed the following blog post to answer questions people had:</p>
+<p><a href="http://seananderson.ca/2014/07/30/centering-interactions.html" class="uri">http://seananderson.ca/2014/07/30/centering-interactions.html</a></p>
+<p>Take home message: If you average across models with and without interactions and you don’t center your predictors by subtracting their mean, your results won’t make sense. You are averaging across coefficients that have different meanings in different models.</p>
+<p>I work through an example with 2 and 3 factor levels, show how to translate these coefficients into predictions on the original data scale, and show how to combine the standard errors to derive confidence intervals at the uncentered factor levels.</p>
+<p>Hopefully you’ll find the explanation and code helpful if you run into a problem like this,</p>
+</div>
+<div id="june-20-2014-deadly-hurricane-re-analyses-and-the-importance-of-plotting-those-residuals" class="section level3">
+<h3>June 20 2014: Deadly hurricane re-analyses and the importance of plotting those residuals</h3>
+<p><em>Sean Anderson</em></p>
+<p>During this temporary summer holiday from Stats Beerz meetings I thought I’d pass this on.</p>
+<p>You might have heard of a recent paper in PNAS purporting that hurricanes with female names are more deadly than hurricanes with male names: <a href="http://www.pnas.org/content/111/24/8782" class="uri">http://www.pnas.org/content/111/24/8782</a></p>
+<p>It gained a lot of press and a number of statistical big guns jumped in.</p>
+<p>Ignoring most of the back and forth debate and ethical accusations, this re-analysis by Bob O’Hara (senior editor of Methods in Ecology and Evolution) is an excellent window into an experienced statistician tackling an applied modelling problem:</p>
+<p><a href="http://rpubs.com/oharar/19171" class="uri">http://rpubs.com/oharar/19171</a></p>
+<p>(Which was written up in the Guardian here: <a href="http://www.theguardian.com/science/grrlscientist/2014/jun/04/hurricane-gender-name-bias-sexism-statistics" class="uri">http://www.theguardian.com/science/grrlscientist/2014/jun/04/hurricane-gender-name-bias-sexism-statistics</a> )</p>
+<p>If you take away one thing, notice the importance of plotting your residuals against everything under the sun. Plot them against fitted (predicted) values and plot them against all your predictors. For valid inference, there shouldn’t be noticeable trends, clumping, or changes in spread. The presence of any of these can suggest a different structure to the model, clumping can also suggest the need for a correlation structure or random effect, changes in spread can also suggest the need for a variance structure.</p>
+<p>Extra links for those interested:</p>
+<p>Followup analysis by Bob O’Hara:</p>
+<p><a href="http://rpubs.com/oharar/20012" class="uri">http://rpubs.com/oharar/20012</a></p>
+<p>Andrew Gelman comments:</p>
+<p><a href="http://andrewgelman.com/2014/06/06/hurricanes-vs-himmicanes/" class="uri">http://andrewgelman.com/2014/06/06/hurricanes-vs-himmicanes/</a> <a href="http://andrewgelman.com/2014/06/17/hurricaneshimmicanes-extra-problematic-nature-scientific-publication-process/" class="uri">http://andrewgelman.com/2014/06/17/hurricaneshimmicanes-extra-problematic-nature-scientific-publication-process/</a> <a href="http://andrewgelman.com/2014/06/18/jeremy-freese-adds-new-item-lexicon/" class="uri">http://andrewgelman.com/2014/06/18/jeremy-freese-adds-new-item-lexicon/</a></p>
+<p>Jeremy Freese comments:</p>
+<p><a href="http://scatter.wordpress.com/2014/06/03/my-thoughts-on-that-hurricane-study/" class="uri">http://scatter.wordpress.com/2014/06/03/my-thoughts-on-that-hurricane-study/</a> <a href="http://scatter.wordpress.com/2014/06/10/the-hurricane-name-study-gets-worse/" class="uri">http://scatter.wordpress.com/2014/06/10/the-hurricane-name-study-gets-worse/</a> <a href="http://scatter.wordpress.com/2014/06/16/the-hurricane-name-people-strike-back/" class="uri">http://scatter.wordpress.com/2014/06/16/the-hurricane-name-people-strike-back/</a> <a href="http://scatter.wordpress.com/2014/06/17/the-hurricane-name-study-tries-again/" class="uri">http://scatter.wordpress.com/2014/06/17/the-hurricane-name-study-tries-again/</a></p>
 </div>
 
 
