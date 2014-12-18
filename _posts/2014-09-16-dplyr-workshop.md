@@ -7,13 +7,11 @@ author: Sean Anderson
 I just added the slides to the Dropbox folder:
 <https://www.dropbox.com/sh/kn6fwmef5e9np8l/AAAv2KMlapwAs6Yd30UbYV9ea?dl=0>
 
-```R
-stats %>%
-beers(as = "homebrew", ignore.low.stock = TRUE) %>%
-frustration %>%
-learning %>%
-filter(success == TRUE)
-```
+    stats %>%
+    beers(as = "homebrew", ignore.low.stock = TRUE) %>%
+    frustration %>%
+    learning %>%
+    filter(success == TRUE)
 
 If you want to go further, see these links:
 
