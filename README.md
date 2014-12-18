@@ -6,7 +6,7 @@ To add a new post,
 
 - Ask to be added to the `sfu-stats-beerz` group on GitHub.
 
-- Go into the `_posts` folder and click the `+` (see the text `sfu-stats-beerz.github.io/_posts/+` at the top).
+- Go into the `_posts` folder and click the `+` (see the text `sfu-stats-beerz.github.io/_posts/+` at the top). Make a new file named based on the date an one or two words. E.g. `2014-01-28-dplyr`. The format of the date is important. That's what the post date gets created from.
 
 - Paste an email/post into the document.
 
