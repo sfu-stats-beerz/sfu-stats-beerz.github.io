@@ -50,6 +50,6 @@ Find the post in the `_posts` folder, click on it, and click on the `Edit` butto
 
 ### To edit or add a new static (non-blog post) page
 
-To add or edit a new static page (e.g. the About page, or maybe you want to add a link page), add or edit a Markdown (`.md`) file in the root folder. E.g. take a look at the file `about.md`. Again, either click on the file and then click `Edit` or click the `+` button to the right of `sfu-stats-beerz.github.io/`.
+To add or edit a new static page (e.g. the About page, or maybe you want to add a link page), add or edit a Markdown (`.md`) file in the root folder. For example, take a look at the file `about.md` (click the `Raw` button when you're looking at that file to see the format). Again, either click on the file and then click `Edit` or click the `+` button to the right of `sfu-stats-beerz.github.io/`.
 
 ![](images/add-page.PNG)
