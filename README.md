@@ -2,11 +2,13 @@ This repository holds archived mailing list material from the stats beerz mailin
 
 See <https://sfu-stats-beerz.github.io> for the rendered webpage.
 
-To add a new post, 
+The website is created by the files in this repository on GitHub. If you know your way around Git and GitHub then you know what to do. If not, don't worry, I've created a quick illustrated guide for you below. You don't need to know anything about Git at all!
+
+### To add a new post
 
 Ask to be added to the `sfu-stats-beerz` group on GitHub.
 
-Go into the `_posts` folder and click the `+` (see the text `sfu-stats-beerz.github.io/_posts/+` at the top).
+Go into the `_posts` folder and click the `+`.
 
 ![](images/add-post.PNG)
 
@@ -14,7 +16,7 @@ Make a new file that is named based on the date and up to a few words. E.g. `201
 
 ![](images/filename.PNG)
 
-Paste the text content into the document.
+Paste the text of an email or whatever you want to post into the document.
 
 Add a header at the top that follows this format:
 
@@ -40,9 +42,13 @@ Note that the post should be written in Markdown format. This is pretty basic an
 
 In particular, note that for URLs to be clickable you need to wrap them in `< >` tags. E.g. `<http://website.com>`.
 
-To edit an old post, find the post in the `_posts` folder, click on it, and click on the `Edit` button near the top right. Edit away, write a commit message, and commit your change. The site will re-generate on its own.
+### To edit an old post
+
+Find the post in the `_posts` folder, click on it, and click on the `Edit` button near the top right. Edit away, write a commit message, and commit your change. The site will re-generate on its own.
 
 ![](images/edit-button.PNG)
+
+### To edit or add a new static (non-blog post) page
 
 To add or edit a new static page (e.g. the About page, or maybe you want to add a link page), add or edit a Markdown (`.md`) file in the root folder. E.g. take a look at the file `about.md`. Again, either click on the file and then click `Edit` or click the `+` button to the right of `sfu-stats-beerz.github.io/`.
 
