@@ -4,13 +4,13 @@ See <https://sfu-stats-beerz.github.io> for the rendered webpage.
 
 To add a new post, 
 
-1. Ask to be added to the `sfu-stats-beerz` group on GitHub.
+- Ask to be added to the `sfu-stats-beerz` group on GitHub.
 
-2. Go into the `_posts` folder and click the `+` (see the text `sfu-stats-beerz.github.io/_posts/+` at the top).
+- Go into the `_posts` folder and click the `+` (see the text `sfu-stats-beerz.github.io/_posts/+` at the top).
 
-3. Paste an email/post into the document.
+- Paste an email/post into the document.
 
-4. Add a header at the top that follows this format:
+- Add a header at the top that follows this format:
 
 ```
 ---
@@ -20,9 +20,9 @@ author: Author Name
 ---
 ```
 
-5. Write a commit message at the bottom. E.g. `Add a new post on ...`
+- Write a commit message at the bottom. E.g. `Add a new post on ...`
 
-6. Click the green `Commit new file` button. You're done!
+- Click the green `Commit new file` button. You're done!
 
 Note that the post should be in Markdown format. This is pretty basic. There are many helpful guides on the internet. E.g. <http://rmarkdown.rstudio.com/authoring_basics.html>.
 
