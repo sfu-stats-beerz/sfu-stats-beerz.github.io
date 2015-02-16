@@ -4,7 +4,7 @@ title: Likelihood, AIC, and Frequentist vs. Bayesian parameter interpretation
 author: Sean Anderson
 ---
 
-Following on from the original version of [Joel's post](r2-hierarchical-models.html):
+Following on from the original version of [Joel's post]({% post_url 2015-02-14-r-squared-hierarchical-models %}):
 
 To be specific, AIC is a measure of relative goodness of fit. One
 component of AIC is the value of the likelihood function at the point

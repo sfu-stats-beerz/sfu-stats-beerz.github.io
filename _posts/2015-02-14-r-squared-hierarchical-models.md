@@ -2,6 +2,7 @@
 layout: post
 title: R-squared for hierarchical models
 author: Joel Harding
+date: 2015-02-14 18:00:00-0400
 ---
 
 For anyone struggling with calculating a proper R-squared for hierarchal models: (see [this paper](doi.org/10.1111/j.2041-210x.2012.00261.x) where the associated code was not straight forward)
