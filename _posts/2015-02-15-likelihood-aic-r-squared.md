@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Likelihood, AIC, and Frequentist vs. Bayesian parameter interpreation
+title: Likelihood, AIC, and Frequentist vs. Bayesian parameter interpretation
 author: Sean Anderson
 ---
 
