@@ -22,7 +22,6 @@ Add a header at the top that follows this format:
 
 ```
 ---
-layout: post
 title:  A title for the post
 author: Author Name
 ---
