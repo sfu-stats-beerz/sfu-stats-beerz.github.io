@@ -1,5 +1,5 @@
 ---
-title:  8 ways to selectively alter data in an R data frame 
+title:  8 ways to selectively alter an R data frame 
 author: Sean Anderson
 ---
 
