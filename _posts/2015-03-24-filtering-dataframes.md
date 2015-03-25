@@ -48,7 +48,7 @@ dplyr::filter(d, rel == "no")
 #> 1  no     2
 {% endhighlight %}
 
-Different ways of selecting the `troph` colum with `rel == "no"`:
+Different ways of selecting the `troph` column with `rel == "no"`:
 
 {% highlight R %}
 d[d$rel == "no", ]$troph 
