@@ -3,7 +3,7 @@ title:  Predicting responses with model averaged coefficients
 author: Amanda Kissel
 ---
 
-Here's some code from [Rylee Murray] (https://twitter.com/ryleega) for predicting responses with model averaged coefficients. In this particular example, he uses the models that sum to 95% of the cumulative AIC weight. But note that the models you average will depend on your question and specific analysis. 
+Here's some code from [Rylee Murray](https://twitter.com/ryleega) for predicting responses with model averaged coefficients. In this particular example, he uses the models that sum to 95% of the cumulative AIC weight. But note that the models you average will depend on your question and specific analysis. 
 
 {% highlight R %}
 #using 
