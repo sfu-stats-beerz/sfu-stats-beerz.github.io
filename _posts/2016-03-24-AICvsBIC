@@ -1,0 +1,28 @@
+---
+title:  AIC vs BIC model selection
+author: Amanda Kissel and Sean Anderson
+---
+
+The difference between AIC and BIC came up in stats beerz this week. Here's a brief overview from [Sean Anderson](http://seananderson.ca/blog.html) from several months ago: 
+
+I'm pretty sure you could write a novel on this topic. In times
+like that, I like to ask WWBBD or 'what would Ben Bolker do?'
+
+See [his book](http://ms.mcmaster.ca/~bolker/emdbook/book.pdf), starting on page 277
+
+Also, see this short [blog post](http://emdbolker.wikidot.com/blog:aic-vs-bic) he wrote a while back:
+
+AIC is by far the most common information criteria. Certainly in ecology.
+[This paper](http://onlinelibrary.wiley.com/doi/10.1890/13-1452.1/full) by Aho et al. (2014) found that 84% of papers that used information criteria used
+AIC and only 14% used BIC (also a good read and more than you probably want
+to know).
+
+One important thing here, besides the slightly different formulas for
+AIC and BIC, is that AIC and BIC try to answer different questions.
+AIC seeks to find the most parsimonious model. In other words, it
+tries to maximize predictive accuracy. BIC tries to find the 'true'
+model. In other words, if the 'true' model was among the models
+considered and as sample size increases, BIC should correctly rank the
+'true' model as the best model. A bit hard to wrap your mind around,
+yes. I think ecologists may tend to focus more on what AIC aims to
+answer. That's essentially Ben's conclusion.
